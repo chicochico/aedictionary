@@ -48,15 +48,6 @@ class TextPreProcessor():
         
         for word in word_set:
             if word != '':
-#                 item.word = word
-#                 item.ocurrences = self.word_list.count(word)
-#                 
-#                 for key in output:
-#                     for i, word in enumerate(self.word_list):
-#                         if key == word:
-#                             item.ocurrences.append(i)
-#                 
-#                 output.append(item)
                 output[word] = [self.word_list.count(word),[]]
         
         for key in output:

@@ -15,5 +15,7 @@ if __name__ == '__main__':
     hash_table = Hash(file.dictionary_list)
     avl_tree = AVL()
 
-    print(file.dictionary_list)
-    print(file.dictionary_list)
+    print(table.keys)
+    table.remove("adiciona")
+    print(table.keys)
+    print(table.table)

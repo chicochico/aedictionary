@@ -6,10 +6,10 @@ class Table():
         self.table = table
         self.keys = sorted(self.table.keys())
         self.keys.sort()
-        print(self.keys)
         
     def remove(self, word):
-        pass
+        self.keys.remove(word)
+        del self.table[word]
     
     def find(self, word):
-        pass
+        pass 
