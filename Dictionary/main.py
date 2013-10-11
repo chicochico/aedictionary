@@ -16,5 +16,4 @@ if __name__ == '__main__':
     avl_tree = AVL()
 
     print(file.dictionary_list)
-#     table = Table(text.dictionary_list)
-#     print(file.dictionary_list)
+    print(file.dictionary_list)
