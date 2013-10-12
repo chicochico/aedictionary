@@ -15,16 +15,15 @@ class Table():
         return self.binary_search(0, len(self.keys), word)
         
         
-    def binary_search(self, leftIndex, rightIndex, word):
-        if (leftIndex == rightIndex and self.keys[leftIndex] != word):
-            return -1
+    def binary_search(self, lo, hi, word):
+        if (lo == hi and self.keys[lo] != word):
+            return False
         
-        middleIndex = int((leftIndex + rightIndex) / 2)
+        mid = (lo + hi)//2
         
-        if (self.keys[middleIndex] == word):
-            return middleIndex
-        elif (self.keys[middleIndex] > word):
-            self.binary_search(middleIndex+1, rightIndex, word)
+        if (self.keys[mid] == word):
+            return mid
+        elif (self.keys[mid] > word):
+            return self.binary_search(mid+1, hi, word)
         else:
-            self.binary_search(leftIndex, middleIndex-1, word)
-        
+            return self.binary_search(lo, mid-1, word)
