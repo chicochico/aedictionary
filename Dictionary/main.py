@@ -16,6 +16,4 @@ if __name__ == '__main__':
     avl_tree = AVL()
 
     print(table.keys)
-    table.remove("adiciona")
-    print(table.keys)
-    print(table.table)
+    table.binary_search(0, len(table.keys), "adiciona")
