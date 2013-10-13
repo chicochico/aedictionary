@@ -16,4 +16,9 @@ if __name__ == '__main__':
     avl_tree = AVL()
 
     print(table.keys)
-    print(table.binary_search(0, len(table.keys)-1, "alertou"))
+    print(table.table)
+    
+    for i in table.table:
+        hash_table.add(i)
+        
+    print(hash_table.hash_table)

@@ -3,7 +3,7 @@
 class Hash():
     
     def __init__(self, data):
-        self.hash_table = []
+        self.hash_table = [None]*5000
         self.data = data
     
     def hash_function(self, word):
@@ -12,17 +12,42 @@ class Hash():
         for i, j in enumerate(word):
             output += ord(j) * i
 
-        return output
-        
+        return output % 5000
     
-    def remove(self):
-        pass
+          
+    def remove(self, word):
+        position = self.hash_function(word)
+        
+        if self.hash_table[position] == word:
+            self.hash_table[position] = None
+        else:
+            position = self.colision_treatment(position+1, word)
+            if position != None:
+                self.hash_table[position] = word
+    
     
     def add(self, word):
-        pass
+        position = self.hash_function(word)
+        if self.hash_table[position] == None:
+            self.hash_table[position] = word
+        else:
+            position = self.colision_treatment(position+1, None)
+            if (position != None):
+                self.hash_table[position] = word
     
-    def find(self):
-        pass
     
-    def colision_treatment(self):
-        pass
+    def find(self, word):
+        position = self.hash_function(word)
+        
+        if self.hash_table[position] == word:
+            return position
+        else:
+            return self.colision_treatment(position, word)
+    
+            
+    def colision_treatment(self, start, word):
+        for i in range(start, 5000):
+            if i == word:
+                return i
+        else:
+            return None
