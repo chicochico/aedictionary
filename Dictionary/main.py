@@ -22,3 +22,5 @@ if __name__ == '__main__':
         hash_table.add(i)
         
     print(hash_table.hash_table)
+    
+    # small update
