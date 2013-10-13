@@ -18,9 +18,3 @@ if __name__ == '__main__':
     print(table.keys)
     print(table.table)
     
-    for i in table.table:
-        hash_table.add(i)
-        
-    print(hash_table.hash_table)
-    
-    # small update
