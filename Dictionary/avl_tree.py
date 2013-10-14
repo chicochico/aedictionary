@@ -28,7 +28,7 @@ class AVL():
             return False
     
     def add(self, word):
-        self.find_add(self.root, False, word)
+        self.root = self.find_add(self.root, False, word)
 #         new_node = self.find(self.root, word)
 #         
 #         if new_node.word > word:
@@ -64,105 +64,118 @@ class AVL():
     
     
     def find_add(self, node, hchanged, word):
-        if self.root == None:
-            self.root = Node()
+        if node == None:
+            node = Node()
             hchanged = True
-            self.root.word = word
+            node.word = word
+            return node
         elif node.word > word:
-            self.find_add(node.lchild, hchanged, word)
+            node = self.find_add(node.lchild, hchanged, word)
            
             if hchanged:
                 if node.bfactor == -1:
                     node.bfactor = 0
                     hchanged = False
+                    return node
                 elif node.bfactor == 0:
                     node.bfactor = 1
+                    return node
                 elif node.bfactor == 1:
                     bnode = node.lchild
                     
                     if bnode.bfactor == 1:
-                        node.lchild = bnode.rchild
-                        bnode.rchild = node
-                        node.bfactor = 0
-                        node = bnode
+                        node = self.ll(node, bnode)
                     else:
-                        cnode = bnode.rchild
-                        bnode.rchild = cnode.lchild
-                        cnode.lchild = bnode
-                        node.lchild = cnode.rchild
-                        cnode.rchild = node
-                        
-                        if cnode.bfactor == 1:
-                            node.bfactor = -1
-                        else:
-                            node.bfactor = 0
-                            
-                        if cnode.bfactor == -1:
-                            bnode.bfactor = 1
-                        else:
-                            bnode.bfactor = 0
+                        node = self.lr(node, bnode)
                             
                     node.bfactor = 0
                     hchanged = False
+                    return node
                     
         elif node.word < word:
-            self.find_add(node.rchild, hchanged, word)
+            node = self.find_add(node.rchild, hchanged, word)
             
             if hchanged:
                 if node.bfactor == 1:
                     node.bfactor = 0
                     hchanged = False
+                    return node
                 elif node.bfactor == 0:
                     node.bfactor = 1
+                    return node
                 elif node.bfactor == -1:
                     bnode = node.rchild
                     
                     if bnode.bfactor == -1:
-                        node.rchild = bnode.lchild
-                        bnode.lchild = node
-                        node.bfactor = 0
-                        node = bnode
+                        self.rr(node, bnode)
                     else:
-                        cnode = bnode.lchild
-                        bnode.lchild = cnode.rchild
-                        cnode.rchild = bnode
-                        node.rchild = cnode.lchild
-                        cnode.lchild = node
-                        
-                        if cnode.bfactor == -1:
-                            node.bfactor = 1
-                        else:
-                            node.bfactor = 0
+                        self.rl(node, bnode)
                             
-                        if cnode.bfactor == 1:
-                            bnode.bfactor = -1
-                        else:
-                            bnode.bfactor = 0
-                            
-                        node.bfactor = 0
-                        hchanged = False
+                    node.bfactor = 0
+                    hchanged = False
+                    return node
         else:
-            pass
+            return node
         
         
     def rebalance(self):
         pass
     
     
-    def ll(self):
-        pass
+    def ll(self, anode, bnode):
+        anode.lchild = bnode.rchild
+        bnode.rchild = anode
+        anode.bfactor = 0
+        anode = bnode
+        return anode
     
     
-    def rr(self):
-        pass
+    def rr(self, anode, bnode):
+        anode.rchild = bnode.lchild
+        bnode.lchild = anode
+        anode.bfactor = 0
+        anode = bnode
+        return anode
     
     
-    def lr(self):
-        pass
+    def lr(self, anode, bnode):
+        cnode = bnode.rchild
+        bnode.rchild = cnode.lchild
+        cnode.lchild = bnode
+        anode.lchild = cnode.rchild
+        cnode.rchild = anode
+        
+        if cnode.bfactor == 1:
+            anode.bfactor = -1
+        else:
+            anode.bfactor = 0
+            
+        if cnode.bfactor == -1:
+            bnode.bfactor = 1
+        else:
+            bnode.bfactor = 0
+            
+        return anode
     
     
-    def rl(self):
-        pass
+    def rl(self, anode, bnode):
+        cnode = bnode.lchild
+        bnode.lchild = cnode.rchild
+        cnode.rchild = bnode
+        anode.rchild = cnode.lchild
+        cnode.lchild = anode
+        
+        if cnode.bfactor == -1:
+            anode.bfactor = 1
+        else:
+            anode.bfactor = 0
+            
+        if cnode.bfactor == 1:
+            bnode.bfactor = -1
+        else:
+            bnode.bfactor = 0
+            
+        return anode
     
     
     def in_order(self, node):

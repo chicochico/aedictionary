@@ -18,3 +18,10 @@ if __name__ == '__main__':
     print(table.keys)
     print(table.table)
     
+    l = [12,26,29,30,40,31,42,47,85,88,10]
+    
+    for i in l:
+        avl_tree.add(i)
+
+    print(avl_tree.root.word)
+    print(avl_tree.root.rchild.word)
