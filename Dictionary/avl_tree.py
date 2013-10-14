@@ -30,14 +30,14 @@ class AVL():
     def add(self, word):
         self.root = self.find_add(self.root, False, word)
 #         new_node = self.find(self.root, word)
-#         
+#          
 #         if new_node.word > word:
 #             new_node.lchild = Node()
 #             new_node.lchild.word = word
 #         else:
 #             new_node.rchild = Node()
 #             new_node.rchild.word = word
-#             
+#              
 #         self.rebalance()
 
 
@@ -107,9 +107,9 @@ class AVL():
                     bnode = node.rchild
                     
                     if bnode.bfactor == -1:
-                        self.rr(node, bnode)
+                        node = self.rr(node, bnode)
                     else:
-                        self.rl(node, bnode)
+                        node = self.rl(node, bnode)
                             
                     node.bfactor = 0
                     hchanged = False
