@@ -25,6 +25,8 @@ class TextPreProcessor():
         return data
     
     def process(self):
+        self.text = self.text.lower()
+        
         characters_replacements = {'[àáâã]':'a',
                                      '[éê]':'e',
                                         'í':'i',
@@ -33,12 +35,11 @@ class TextPreProcessor():
                                         'ç':'c',
         }
 
-        self.text = self.text.lower()
               
         for exp, rep in characters_replacements.items():
             self.text = re.sub(exp, rep, self.text)
 
-        self.text = re.sub('[ \t\n\r\f\v]|[^a-zA-Z_]', ' ', self.text)
+        self.text = re.sub('[ \t\n\r\f\v]|[^a-z_]', ' ', self.text)
         
         return re.split(' +', self.text)
     

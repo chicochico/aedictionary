@@ -5,6 +5,9 @@ class Hash():
     def __init__(self, data):
         self.hash_table = [None]*5000
         self.data = data
+        
+        for key in data:
+            self.add(key)
     
     def hash_function(self, word):
         output = 0
