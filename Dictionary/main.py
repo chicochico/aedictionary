@@ -1,10 +1,10 @@
 # -*- encoding: utf-8 -*-
 
-from file import Word
 from file import TextPreProcessor
 from table import Table
 from hash_table import Hash
 from avl_tree import AVL
+from random import randint
 
 
 
@@ -28,6 +28,7 @@ def take_action(option):
     global table
     global hash_table
     global avl_tree
+    global random_numbers
     
     old_file = file_name
     
@@ -41,7 +42,6 @@ def take_action(option):
             file_name = old_file
             
     elif option == 2:
-        
         try:
             table = Table(file.dictionary_list)
             
@@ -116,6 +116,18 @@ def take_action(option):
             print(file.text)
         except:
             print("nao ha arquivo aberto")
+            
+    elif option == 7:
+        random_numbers = []
+        for _ in range(1000):
+            random_numbers.append(randint(0,len(table.keys)-1))
+        
+        for i in random_numbers:
+            print("tabela: " + table.keys[i] + "    posicao: " + str(table.find(table.keys[i])) + "    comparacoes: " + str(table.comps))
+            print("hash: " + table.keys[i] + "    posicao: " + str(hash_table.find(table.keys[i])) + "    comparacoes: " + str(hash_table.comps))
+            
+            table.comps = 0
+            hash_table.comps = 0
 
 
 if __name__ == '__main__':
@@ -126,6 +138,7 @@ if __name__ == '__main__':
     table = None
     hash_table = None
     avl_tree = None
+    random_numbers = None
 
     option = 1
     
@@ -138,48 +151,10 @@ if __name__ == '__main__':
                 option = int(input("Selecione: "))
                 break
             except:
-                print("NUMERO! FILHO DA PUTA!")
+                print("insira apenas numero!")
                 print()
         
         if option:
             take_action(option)
             option = 1
     
-    
-#     print(table.keys)
-#     print(table.table)
-    
-
-#     print(table.find("aquelas"))
-    
-#     l = [12,26,29,30,40,31,42,47,85,88,10]
-    
-#     avl_tree.root = Node()
-#     avl_tree.root.word = 4
-#     avl_tree.root.rchild = Node()
-#     avl_tree.root.rchild.word = 5
-#     avl_tree.root.rchild.rchild = Node()
-#     avl_tree.root.rchild.rchild.word = 7
-#     
-#     print(avl_tree.root.word)
-#     print(avl_tree.root.rchild.word)
-#     print(avl_tree.root.rchild.rchild.word)
-#     
-#     bnode = avl_tree.root.rchild
-#     
-#     avl_tree.root = avl_tree.rr(avl_tree.root, bnode)
-#     print("fuck")
-#     
-#     print(avl_tree.root.word)
-#     print(avl_tree.root.lchild.word)
-#     print(avl_tree.root.rchild.word)
-#     
-#     for i in table.table:
-#         hash_table.add(i)
-#         
-#     print(hash_table.hash_table)
-#     
-#     print(hash_table.find("alimentado"))
-#  
-#     print(avl_tree.root.word)
-#     print(avl_tree.root.rchild.word)

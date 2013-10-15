@@ -2,14 +2,6 @@
 
 import re
 
-class Word():
-    
-    def __init__(self):
-        self.word = None
-        self.ocurrences = None
-        self.positions = []
-
-
 class TextPreProcessor():
        
     def __init__(self, file_name):

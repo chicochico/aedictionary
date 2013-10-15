@@ -5,6 +5,7 @@ class Hash():
     def __init__(self, data):
         self.hash_table = [None]*5000
         self.data = data
+        self.comps = 0
         
         for key in data:
             self.add(key)
@@ -43,6 +44,7 @@ class Hash():
         position = self.hash_function(word)
         
         if self.hash_table[position] == word:
+            self.comps =+ 1
             return position
         else:
             return self.colision_treatment(position, word)
